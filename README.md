@@ -1,1 +1,1 @@
-# ruby-mastermind
+# Do you think you're smarter than Jeeves?
