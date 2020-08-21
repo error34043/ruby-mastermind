@@ -9,18 +9,7 @@ require_relative 'code.rb'
 require_relative 'feedback.rb'
 require_relative 'gameplay.rb'
 
-# Define game methods
-class GamePlay
-  def start
-  end
-
-  def decide_roles
-  end
-  
-  def user_codebreak_turn
-  end
-end
-
 # Testing
-test = Board.new
-test.display_code(['r', 'r', 'r', 'r'])
+test = GamePlay.new
+test.new_game_begin
+############ USER AND JEEVES OBJECTS CREATED; NAME AND ROLE SET

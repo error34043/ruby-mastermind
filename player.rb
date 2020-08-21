@@ -5,8 +5,9 @@ class Player
 
   ROLES = %w[null codebreaker codemaker].freeze
 
-  def initialize(name)
+  def initialize(name, role = 0)
     @name = name
+    @role = ROLES[role]
   end
 
   def specify_role=(role_choice)
