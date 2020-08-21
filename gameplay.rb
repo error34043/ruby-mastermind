@@ -56,10 +56,16 @@ class GamePlay
     end
   end
 
-  def new_game_begin
+  def new_game_begin(flag)
     user = Player.new(start)
     jeeves = Player.new('Jeeves')
     decide_roles(user, jeeves)
+    if @codemaker.name == 'Jeeves'
+      flag = false
+    else
+      flag = true
+    end
+    return flag
   end
 
   def replay_game?(flag)

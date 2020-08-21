@@ -22,10 +22,22 @@ class Codebreaker < Code
   end
 
   def turn
+    current_board = Board.new
+    guess = user_guess
+    current_board.block_display_code(guess)
+    puts @code
+    p result = code_match?(guess, @code)
   end
 end
 
 
 # Testing
+=begin
 test = Codebreaker.new
-p test.code
+12.times do
+  current = test.turn
+  if current[:c] == 4
+    break
+  end
+end
+=end

@@ -10,35 +10,36 @@ require_relative 'feedback.rb'
 require_relative 'gameplay.rb'
 require_relative 'codebreaker.rb'
 require_relative 'codemaker.rb'
-
+=begin
 def replay?(game, flag)
   game.replay_game?(flag)
 end
 
-# Testing
+
 replay = true
-use_AI = false
-
-game = GamePlay.new
-game.new_game_begin
-################### USER AND JEEVES OBJECTS CREATED; NAME AND ROLE SET
-
-if game.codemaker.name == 'Jeeves'
-  use_AI = false
-else
-  use_AI = true
-end
-### DECIDES WHICH LOOP TO FOLLOW
+=end
+begin_game = GamePlay.new
+use_AI = begin_game.new_game_begin(use_AI)
+################### USER AND JEEVES OBJECTS CREATED; NAME AND ROLE SET; use_AI value set
 
 # Loop for when user is the codebreaker
-if @use_AI == false
-
+if use_AI == false
+  current_game = Codebreaker.new
+  12.times do
+    current = current_game.turn
+    if current[:c] == 4
+      break
+    end
+  end
 end
 
+
+=begin
 # Loop for when user is the codemaker
-if @use_AI == true
+if use_AI == true
 
 end
 
 #replay?(game, replay)
 ################## THIS WORKS TO RESET GET NEW INPUT FOR SPECIFYING ROLES
+=end

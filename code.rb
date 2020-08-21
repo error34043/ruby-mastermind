@@ -38,7 +38,7 @@ class Code
   end
 
   def user_guess
-    puts "Please input your guess as 4 letters, one for each colored peg, with no spaces. (eg: rgby)"
+    puts "\nPlease input your guess as 4 letters, one for each colored peg, with no spaces. (eg: rgby)"
     pass = false
     while pass == false
       print "[Guess]: "
@@ -49,8 +49,8 @@ class Code
   end
 
   def code_match?(guess, jeeves_code)
-    guess_temp = guess
-    jeeves_code_temp = jeeves_code
+    guess_temp = guess.dup
+    jeeves_code_temp = jeeves_code.dup
     results = {c: 0, p: 0}
     (guess_temp.length - 1).downto(0) do |index|
       if guess_temp[index] == jeeves_code_temp[index]
@@ -64,6 +64,8 @@ class Code
         results[:p] += 1
       end
     end
+    p "guess_temp: #{guess_temp}"
+    p "jeeves_code_temp: #{jeeves_code_temp}"
     return results
   end
 

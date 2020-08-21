@@ -11,6 +11,6 @@ class Board
       index = COLOR_CHOICES.find_index(color)
       print "#{COLOR_DISPLAY[index][:block_display]} "
     end
-    puts "\n"
+    print "\n\n"
   end
 end
