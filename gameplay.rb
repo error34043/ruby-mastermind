@@ -15,6 +15,10 @@ class GamePlay
 
   @codemaker = ''
   @codebreaker = ''
+  @win = false
+  @number_of_turns = 0
+  @user_name = ''
+  
 
   def start
     puts logo
@@ -22,10 +26,12 @@ class GamePlay
     puts jeeves
     print "\nWhat is your name? "
     player_name = gets.chomp
+    puts "\nLovely to meet you, #{player_name}."
+    @user_name = player_name
   end
 
   def decide_roles(player1, player2)
-    puts "\nLovely to meet you, #{player1.name}. Would you like to crack a code or make one?"
+    puts "Would you like to crack a code or make one?"
     puts "1. Break a code"
     puts "2. Make a code"
     while true
@@ -39,7 +45,7 @@ class GamePlay
         break
       elsif user_choice == 2
         player1.specify_role = 2
-        player2.specify_role = 2
+        player2.specify_role = 1
         @codebreaker = player1
         @codemaker = player2
         break
@@ -52,9 +58,28 @@ class GamePlay
   def new_game_begin
     user = Player.new(start)
     jeeves = Player.new('Jeeves')
-    temp = decide_roles(user, jeeves)
+    decide_roles(user, jeeves)
   end
   
+  def replay_game?
+    puts "Great game, #{@user_name}! Would you like to play again?"
+    while true
+      print "[y/n]: "
+      input = gets.chomp.downcase
+      if input == 'y' || input == 'yes'
+        user = Player.new(@user_name)
+        jeeves = Player.new('Jeeves')
+        decide_roles(user, jeeves)
+        break
+      elsif input == 'n' || input == 'no'
+        puts "Very well. Thank you for playing and I hope to see you again soon!"
+        break
+      else
+        puts "I didn't quite get that. Would you like to play again?"
+      end
+    end
+  end
+
   def user_codebreak_turn
   end
 end
