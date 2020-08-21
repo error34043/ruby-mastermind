@@ -1,5 +1,24 @@
 # frozen_string_literal: true
 
+# Array of possible colors included in the code
+module AvailableColors
+  COLOR_CHOICES = %w[r g y b m t].freeze
+  # Colors are: Red, Green, Yellow, Blue, Magenta, and Teal
+end
+
+# Contains game instructions
+# rubocop:disable Style/StringLiterals
+# rubocop:disable Layout/LineLength
+# rubocop:disable Metrics/AbcSize
+module Instructions
+  def valid_code
+    "A valid code is one which contains 4 letters with no spaces between them. Each letter represents one color, as follows:" + "\n-- red, " + 'r'.red + "\n-- Green, " + 'g'.green + "\n-- Yellow, " + 'y'.yellow + "\n-- Blue, " + 'b'.blue + "\n-- Magenta, " + 'm'.magenta + "\n-- Teal, " + 't'.teal
+  end
+end
+# rubocop:enable Style/StringLiterals
+# rubocop:enable Layout/LineLength
+# rubocop:enable Metrics/AbcSize
+
 # Add colors to strings
 class String
   def use_code(color_code)
@@ -25,18 +44,68 @@ class String
   # rubocop:enable Style/SingleLineMethods
 end
 
-# Create Player objects
+# Instances set player attributes
 class Player
+  attr_accessor :role
   attr_reader :name
+
+  ROLES = %w[null codebreaker codemaker].freeze
 
   def initialize(name)
     @name = name
   end
+
+  def specify_role=(role_choice)
+    @role = ROLES[role_choice]
+  end
 end
 
-# Create boards
+# Create and display boards
 class Board
+end
+
+# Create random codes and check for code matches
+class Code
+  include AvailableColors
+  include Instructions
+
+  def create_random_code
+    [COLOR_CHOICES[rand(0..5)], COLOR_CHOICES[rand(0..5)], COLOR_CHOICES[rand(0..5)], COLOR_CHOICES[rand(0..5)]].freeze
+  end
+
+  def valid_input?(array)
+    result_arr = []
+    array.each do |color|
+      if COLOR_CHOICES.include? color
+        result_arr.push(true)
+      else
+        result_arr.push(false)
+      end
+    end
+    validity = result_arr.include? false
+    validity ? false : true
+  end
+
+  def make_code # rubocop:disable Metrics/MethodLength
+    loop do
+      print 'Please enter the code to set [eg: rgby]: '
+      input_code = gets.chomp.downcase.split('').freeze
+      if input_code.length != 4
+        puts "\nPlease enter a code that is 4 letters long."
+      elsif valid_input?(input_code) == false
+        puts "\nPlease enter a valid code. "
+        puts valid_code
+      else
+        return input_code
+      end
+    end
+  end
+end
+
+# Create and display feedback statements
+class Feedback
   PEG = "\u2b23".encode
+  ARROW = "\u27eb".encode
 
   def full_correct_peg
     PEG.green
@@ -52,25 +121,5 @@ class GamePlay
 end
 
 # Testing
-arrow = "\u27eb"
-test = Board.new
-x = "#{arrow} Feedback for this round: "
-2.times do
-  x += "#{test.full_correct_peg} #{test.partial_correct_peg} "
-end
-puts x
-
-puts 'Hello, my name is Jeeves. Shall we play a game?'
-print '[y/n]: '.blue
-choice = gets.chomp
-if choice == 'y'
-  puts 'Wonderful. What is your name?'
-  name = gets.chomp
-  player = Player.new(name)
-  puts "Lovely to meet you, #{player.name}. Would you like to make a code or crack one?"
-  puts '1. Break a code'
-  puts '2. Make a code'
-  print '[1/2]: '.blue
-  role_choice = gets.chomp.to_i
-  puts role_choice.is_a? Integer
-end
+test = Code.new
+p test.make_code
