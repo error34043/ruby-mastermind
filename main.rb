@@ -119,7 +119,3 @@ end
 # Define game methods
 class GamePlay
 end
-
-# Testing
-test = Code.new
-p test.make_code
