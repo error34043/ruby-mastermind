@@ -16,9 +16,10 @@ class GamePlay
   @codemaker = ''
   @codebreaker = ''
   @win = false
-  @number_of_turns = 0
+  @rounds = 0
   @user_name = ''
   
+  def initialize; end
 
   def start
     puts logo
@@ -46,8 +47,8 @@ class GamePlay
       elsif user_choice == 2
         player1.specify_role = 2
         player2.specify_role = 1
-        @codebreaker = player1
-        @codemaker = player2
+        @codebreaker = player2
+        @codemaker = player1
         break
       else
         puts "Please enter either 1 or 2."
@@ -60,8 +61,8 @@ class GamePlay
     jeeves = Player.new('Jeeves')
     decide_roles(user, jeeves)
   end
-  
-  def replay_game?
+
+  def replay_game?(flag)
     puts "Great game, #{@user_name}! Would you like to play again?"
     while true
       print "[y/n]: "
@@ -70,16 +71,15 @@ class GamePlay
         user = Player.new(@user_name)
         jeeves = Player.new('Jeeves')
         decide_roles(user, jeeves)
+        flag = true
         break
       elsif input == 'n' || input == 'no'
         puts "Very well. Thank you for playing and I hope to see you again soon!"
+        flag = false
         break
       else
         puts "I didn't quite get that. Would you like to play again?"
       end
     end
-  end
-
-  def user_codebreak_turn
   end
 end

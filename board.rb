@@ -5,7 +5,7 @@ require_relative 'string.rb'
 class Board
   include AvailableColors
 
-  def display_code(code)
+  def block_display_code(code)
     puts ''
     code.each do |color|
       index = COLOR_CHOICES.find_index(color)
