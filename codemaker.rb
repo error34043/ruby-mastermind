@@ -83,7 +83,7 @@ class Codemaker < Code
     response = Feedback.new
     pretty_pegs = response.display_feedback(result)
     if pretty_pegs == ''
-      puts "#{ARROW} The feedback for round #{@rounds} is: None of the entered colors are present in Jeeves' code."
+      puts "#{ARROW} The feedback for round #{@rounds} is: None of Jeeves' entered colors are present in your code."
     else
       puts "#{ARROW} The feedback for round #{@rounds} is: #{pretty_pegs}"
     end
