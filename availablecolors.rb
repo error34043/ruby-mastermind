@@ -10,37 +10,37 @@ module AvailableColors
       color: 'red',
       code: 'r',
       block_display: '  '.bg_red,
-      code_display: 'r'.red
+      code_display: 'red'.red
     },
     {
       color: 'green',
       code: 'g',
       block_display: '  '.bg_green,
-      code_display: 'g'.green
+      code_display: 'green'.green
     },
     {
       color: 'yellow',
       code: 'y',
       block_display: '  '.bg_yellow,
-      code_display: 'y'.yellow
+      code_display: 'yellow'.yellow
     },
     {
       color: 'blue',
       code: 'b',
       block_display: '  '.bg_blue,
-      code_display: 'b'.blue
+      code_display: 'blue'.blue
     },
     {
       color: 'magenta',
       code: 'm',
       block_display: '  '.bg_magenta,
-      code_display: 'm'.magenta
+      code_display: 'magenta'.magenta
     },
     {
       color: 'teal',
       code: 't',
       block_display: '  '.bg_teal,
-      code_display: 't'.teal
+      code_display: 'teal'.teal
     }
   ].freeze
 end

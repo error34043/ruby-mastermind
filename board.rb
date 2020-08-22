@@ -13,4 +13,13 @@ class Board
     end
     print "\n\n"
   end
+
+  def string_display_code(code)
+    display_string = ''
+    code.each do |color|
+      index = COLOR_CHOICES.find_index(color)
+      display_string += "#{COLOR_DISPLAY[index][:code_display]} "
+    end
+    return display_string
+  end
 end

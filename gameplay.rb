@@ -12,11 +12,11 @@ class GamePlay
   include Instructions
 
   attr_accessor :codemaker, :codebreaker
+  attr_reader :user_name
 
   @codemaker = ''
   @codebreaker = ''
   @win = false
-  @rounds = 0
   @user_name = ''
   
   def initialize; end
@@ -43,13 +43,13 @@ class GamePlay
         player2.specify_role = 2
         @codebreaker = player1
         @codemaker = player2
-        break
+        return false
       elsif user_choice == 2
         player1.specify_role = 2
         player2.specify_role = 1
         @codebreaker = player2
         @codemaker = player1
-        break
+        return true
       else
         puts "Please enter either 1 or 2."
       end
@@ -59,31 +59,22 @@ class GamePlay
   def new_game_begin(flag)
     user = Player.new(start)
     jeeves = Player.new('Jeeves')
-    decide_roles(user, jeeves)
-    if @codemaker.name == 'Jeeves'
-      flag = false
-    else
-      flag = true
-    end
-    puts valid_code
-    return flag
+    return decide_roles(user, jeeves)
   end
 
-  def replay_game?(flag)
+  def replay_game?(ai_flag)
     puts "Great game, #{@user_name}! Would you like to play again?"
     while true
       print "[y/n]: "
       input = gets.chomp.downcase
+      puts ''
       if input == 'y' || input == 'yes'
         user = Player.new(@user_name)
         jeeves = Player.new('Jeeves')
-        decide_roles(user, jeeves)
-        flag = true
-        break
+        return true
       elsif input == 'n' || input == 'no'
         puts "Very well. Thank you for playing and I hope to see you again soon!"
-        flag = false
-        break
+        return false
       else
         puts "I didn't quite get that. Would you like to play again?"
       end
