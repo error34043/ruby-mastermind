@@ -40,15 +40,3 @@ class Codebreaker < Code
     return result
   end
 end
-
-
-# Testing
-=begin
-test = Codebreaker.new
-12.times do
-  current = test.turn
-  if current[:c] == 4
-    break
-  end
-end
-=end
