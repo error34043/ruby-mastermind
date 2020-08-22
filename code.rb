@@ -59,13 +59,14 @@ class Code
         jeeves_code_temp.delete_at(index)
       end
     end
-    guess_temp.each do |color|
-      if jeeves_code_temp.include? color
+    (guess_temp.length - 1).downto(0) do |index|
+      if jeeves_code_temp.include? guess_temp[index]
         results[:p] += 1
+        jeeves_index = jeeves_code_temp.index(guess_temp[index])
+        guess_temp.delete_at(index)
+        jeeves_code_temp.delete_at(jeeves_index)
       end
     end
-    p "guess_temp: #{guess_temp}"
-    p "jeeves_code_temp: #{jeeves_code_temp}"
     return results
   end
 
