@@ -13,7 +13,7 @@ class Codebreaker < Code
   include AvailableColors
   include Instructions
 
-  attr_accessor :code, :rounds
+  attr_reader :code, :rounds
   
   @code = []
   @rounds = 0
