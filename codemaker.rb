@@ -37,8 +37,9 @@ class Codemaker < Code
   end
 
   def jeeves_thinks
-    puts "\nJeeves is processing..."
-    sleep 2
+    print "\nJeeves is considering his options"
+    3.times { print "."; sleep 0.5}
+    puts ''
   end
 
   def initialize
@@ -76,8 +77,7 @@ class Codemaker < Code
   def jeeves_turn
     @rounds += 1
     current_board = Board.new
-    max_index = @solution_pool.length - 1
-    guess = @solution_pool[rand(0..max_index)]
+    guess = @solution_pool.sample
     current_board.block_display_code(guess)
     result = code_match?(guess, @code)
     response = Feedback.new

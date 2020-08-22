@@ -8,7 +8,7 @@ class Code
   include Instructions
 
   def create_random_code
-    [COLOR_CHOICES[rand(0..5)], COLOR_CHOICES[rand(0..5)], COLOR_CHOICES[rand(0..5)], COLOR_CHOICES[rand(0..5)]].freeze
+    [COLOR_CHOICES.sample, COLOR_CHOICES.sample, COLOR_CHOICES.sample, COLOR_CHOICES.sample].freeze
   end
 
   def valid_input?(array)
