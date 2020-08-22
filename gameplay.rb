@@ -67,7 +67,7 @@ class GamePlay
   end
 
   def replay_game?(ai_flag)
-    puts "Great game, #{@user_name}! Would you like to play again?"
+    puts "\nGreat game, #{@user_name}! Would you like to play again?"
     while true
       print "[y/n]: "
       input = gets.chomp.downcase

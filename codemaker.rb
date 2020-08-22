@@ -13,13 +13,14 @@ class Codemaker < Code
   include AvailableColors
   include Instructions
 
-  attr_accessor :solution_pool
-  attr_reader :rounds
+  attr_accessor :solution_pool, :current_result
+  attr_reader :code, :rounds
 
+  ARROW = "\u27eb".encode
   @code = []
   @rounds = 0
-  ARROW = "\u27eb".encode
   @solution_pool = []
+  @current_result = {}
 
   def all_the_choices
     solution_pool_temp = []
@@ -33,6 +34,11 @@ class Codemaker < Code
       end
     end
     solution_pool_temp
+  end
+
+  def jeeves_thinks
+    puts "\nJeeves is processing..."
+    sleep 2
   end
 
   def initialize
@@ -56,10 +62,39 @@ class Codemaker < Code
     end
     return result
   end
+
+  def evaluate_guess(result_hash)
+    result_hash_temp = {}
+    (@solution_pool.length - 1).downto(0) do |index|
+      result_hash_temp = code_match?(@solution_pool[index], @code)
+      if result_hash_temp == result_hash
+        @solution_pool.delete_at(index)
+      end
+    end
+  end
+
+  def jeeves_turn
+    @rounds += 1
+    current_board = Board.new
+    max_index = @solution_pool.length - 1
+    guess = @solution_pool[rand(0..max_index)]
+    current_board.block_display_code(guess)
+    result = code_match?(guess, @code)
+    response = Feedback.new
+    pretty_pegs = response.display_feedback(result)
+    if pretty_pegs == ''
+      puts "#{ARROW} The feedback for round #{@rounds} is: None of the entered colors are present in Jeeves' code."
+    else
+      puts "#{ARROW} The feedback for round #{@rounds} is: #{pretty_pegs}"
+    end
+    return result
+  end
 end
 
 
 # index of ['r','r','g','g'] is 7
 
 # test = Codemaker.new
-# test.jeeves_turn
+# result = test.jeeves_first_turn
+# test.evaluate_guess(result)
+# p test.solution_pool.length

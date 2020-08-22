@@ -52,7 +52,38 @@ while play == true
   if use_AI == true
     win = false
     current_game = Codemaker.new
-    current_game.jeeves_first_turn
+    user_code = current_game.code
+    code_display = Board.new
+    user_code_display = code_display.string_display_code(user_code).strip
+    current_result = current_game.jeeves_first_turn
+    if current_result[:c] == 4
+      win = true
+      puts "Looks like I've bested you, #{begin_game.user_name}! I guessed your code to be #{user_code_display}."
+    else
+      current_game.jeeves_thinks
+      current_game.evaluate_guess(current_result)
+      10.times do
+        current_result = current_game.jeeves_turn
+        if current_result[:c] == 4
+          win = true
+          puts "Looks like I've bested you, #{begin_game.user_name}! I guessed your code to be #{user_code_display}."
+          break
+        end
+        current_game.jeeves_thinks
+        current_game.evaluate_guess(current_result)
+        p current_game.solution_pool.length
+      end
+      if win == false
+        current_result = current_game.jeeves_turn
+        if current_result[:c] == 4
+          win = true
+          puts "Looks like I've bested you, #{begin_game.user_name}! I guessed your code to be #{user_code_display}."
+        end
+      end
+      if win == false
+        puts "#{user_code_display}, I never would have guessed that. You have bested me, #{begin_game.user_name}, and I bow down to you. Please teach me your ways."
+      end
+    end
   end
 
   play = begin_game.replay_game?(use_AI)

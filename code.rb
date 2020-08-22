@@ -73,7 +73,7 @@ class Code
   def user_make_code
     pass = false
     while pass == false do
-      print 'Please enter the code to set [eg: rgby]: '
+      print "\nPlease enter the code to set [eg: rgby]: "
       input_code = gets.chomp.downcase.split('').freeze
       pass = code_input_check(input_code)
     end
