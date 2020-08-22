@@ -65,6 +65,7 @@ class GamePlay
     else
       flag = true
     end
+    puts valid_code
     return flag
   end
 
