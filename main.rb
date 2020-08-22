@@ -15,11 +15,10 @@ def replay?(game, ai_flag, replay_flag)
   game.replay_game?(ai_flag, replay_flag)
 end
 
-
 play = true
 
 begin_game = GamePlay.new
-use_AI = begin_game.new_game_begin
+use_ai = begin_game.new_game_begin
 puts begin_game.valid_code
 player1 = begin_game.codemaker
 player2 = begin_game.codebreaker
@@ -27,7 +26,7 @@ player2 = begin_game.codebreaker
 while play == true
 
   # Loop for when user is the codebreaker
-  if use_AI == false
+  if use_ai == false
     win = false
     current_game = Codebreaker.new
     jeeves_code = current_game.code
@@ -35,20 +34,22 @@ while play == true
     jeeves_code_display = code_display.string_display_code(jeeves_code).strip
     12.times do
       current = current_game.turn
+      # rubocop:disable Style/Next
       if current[:c] == 4
         puts "Well done, #{begin_game.user_name}! You've cracked my code, which was: #{jeeves_code_display}."
         win = true
         break
       end
+      # rubocop:enable Style/Next
     end
     unless win
       puts "Too bad, #{begin_game.user_name}. You have failed to crack my code, which was: #{jeeves_code_display}."
     end
   end
 
-
   # Loop for when user is the codemaker
-  if use_AI == true
+  # rubocop:disable Metrics/BlockNesting
+  if use_ai == true
     win = false
     current_game = Codemaker.new
     user_code = current_game.code
@@ -78,13 +79,17 @@ while play == true
           puts "Looks like I've bested you, #{begin_game.user_name}! I guessed your code to be #{user_code_display}."
         end
       end
+      # rubocop:disable Layout/LineLength
       if win == false
         puts "#{user_code_display}, I never would have guessed that. You have bested me, #{begin_game.user_name}, and I bow down to you. Please teach me your ways."
       end
+      # rubocop:enable Layout/LineLength
     end
   end
+  # rubocop:enable Metrics/BlockNesting
 
-  play = begin_game.replay_game?(use_AI)
+  play = begin_game.replay_game?
   break if play == false
-  use_AI = begin_game.decide_roles(player1, player2)
+
+  use_ai = begin_game.decide_roles(player1, player2)
 end

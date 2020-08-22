@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'availablecolors.rb'
 require_relative 'string.rb'
 
@@ -20,6 +22,6 @@ class Board
       index = COLOR_CHOICES.find_index(color)
       display_string += "#{COLOR_DISPLAY[index][:code_display]} "
     end
-    return display_string
+    display_string
   end
 end

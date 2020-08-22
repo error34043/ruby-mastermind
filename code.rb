@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'availablecolors.rb'
 require_relative 'string.rb'
 require_relative 'instructions.rb'
@@ -27,13 +29,13 @@ class Code
   def code_input_check(input)
     if input.length != 4
       puts "\nPlease enter a code that is 4 letters long."
-      return false
+      false
     elsif valid_input?(input) == false
       puts "\nPlease enter a valid code. "
       puts valid_code
-      return false
+      false
     else
-      return true
+      true
     end
   end
 
@@ -41,17 +43,20 @@ class Code
     puts "\nPlease input your guess as 4 letters, one for each colored peg, with no spaces. (eg: rgby)"
     pass = false
     while pass == false
-      print "[Guess]: "
+      print '[Guess]: '
       guess = gets.chomp.downcase.split('').freeze
       pass = code_input_check(guess)
     end
-    return guess
+    guess
   end
 
+  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Style/Next
   def code_match?(guess, jeeves_code)
     guess_temp = guess.dup
     jeeves_code_temp = jeeves_code.dup
-    results = {c: 0, p: 0}
+    results = { c: 0, p: 0 }
     (guess_temp.length - 1).downto(0) do |index|
       if guess_temp[index] == jeeves_code_temp[index]
         results[:c] += 1
@@ -67,16 +72,19 @@ class Code
         jeeves_code_temp.delete_at(jeeves_index)
       end
     end
-    return results
+    results
   end
+  # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Style/Next
 
   def user_make_code
     pass = false
-    while pass == false do
+    while pass == false
       print "\nPlease enter the code to set [eg: rgby]: "
       input_code = gets.chomp.downcase.split('').freeze
       pass = code_input_check(input_code)
     end
-    return input_code
+    input_code
   end
 end

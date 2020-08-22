@@ -1,4 +1,8 @@
+# frozen_string_literal: true
+
 # Add colors to strings
+# rubocop:disable Style/SingleLineMethods
+# rubocop:disable Layout/EmptyLineBetweenDefs
 class String
   def use_code(color_code)
     "\e[#{color_code}m#{self}\e[0m"
@@ -18,3 +22,5 @@ class String
   def bg_magenta;   use_code(45) end
   def bg_teal;      use_code(46) end
 end
+# rubocop:enable Style/SingleLineMethods
+# rubocop:enable Layout/EmptyLineBetweenDefs

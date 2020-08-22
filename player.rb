@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Instances set player attributes
 class Player
   attr_accessor :role

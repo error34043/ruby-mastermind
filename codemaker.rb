@@ -1,4 +1,4 @@
-# Methods and working for when the user plays as the codemaker
+# frozen_string_literal: true
 
 require_relative 'availablecolors.rb'
 require_relative 'string.rb'
@@ -9,6 +9,7 @@ require_relative 'code.rb'
 require_relative 'feedback.rb'
 require_relative 'gameplay.rb'
 
+# Methods and working for when the user plays as the codemaker
 class Codemaker < Code
   include AvailableColors
   include Instructions
@@ -22,6 +23,9 @@ class Codemaker < Code
   @solution_pool = []
   @current_result = {}
 
+  # rubocop:disable Style/For
+  # rubocop:disable Metrics/BlockNesting
+  # rubocop:disable Metrics/MethodLength
   def all_the_choices
     solution_pool_temp = []
     for i in 0..5
@@ -35,10 +39,16 @@ class Codemaker < Code
     end
     solution_pool_temp
   end
+  # rubocop:enable Style/For
+  # rubocop:enable Metrics/BlockNesting
+  # rubocop:enable Metrics/MethodLength
 
   def jeeves_thinks
     print "\nJeeves is considering his options"
-    3.times { print "."; sleep 0.5}
+    3.times do
+      print '.'
+      sleep 0.5
+    end
     puts ''
   end
 
@@ -48,6 +58,7 @@ class Codemaker < Code
     @code = user_make_code
   end
 
+  # rubocop:disable Metrics/MethodLength
   def jeeves_first_turn
     @rounds += 1
     current_board = Board.new
@@ -61,19 +72,19 @@ class Codemaker < Code
     else
       puts "#{ARROW} The feedback for round #{@rounds} is: #{pretty_pegs}"
     end
-    return result
+    result
   end
+  # rubocop:enable Metrics/MethodLength
 
   def evaluate_guess(result_hash)
     result_hash_temp = {}
     (@solution_pool.length - 1).downto(0) do |index|
       result_hash_temp = code_match?(@solution_pool[index], @code)
-      if result_hash_temp == result_hash
-        @solution_pool.delete_at(index)
-      end
+      @solution_pool.delete_at(index) if result_hash_temp == result_hash
     end
   end
 
+  # rubocop:disable Metrics/MethodLength
   def jeeves_turn
     @rounds += 1
     current_board = Board.new
@@ -87,6 +98,7 @@ class Codemaker < Code
     else
       puts "#{ARROW} The feedback for round #{@rounds} is: #{pretty_pegs}"
     end
-    return result
+    result
   end
+  # rubocop:enable Metrics/MethodLength
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'string.rb'
 
 # Create and display feedback statements
@@ -22,6 +24,6 @@ class Feedback
     1.upto(number_partial) do
       pegs += "#{partial_correct_peg} "
     end
-    return pegs
+    pegs
   end
 end

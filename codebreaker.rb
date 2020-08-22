@@ -1,4 +1,4 @@
-# Methods and working for when the user plays as the codebreaker
+# frozen_string_literal: true
 
 require_relative 'availablecolors.rb'
 require_relative 'string.rb'
@@ -9,12 +9,12 @@ require_relative 'code.rb'
 require_relative 'feedback.rb'
 require_relative 'gameplay.rb'
 
+# Methods and working for when the user plays as the codebreaker
 class Codebreaker < Code
   include AvailableColors
   include Instructions
 
   attr_reader :code, :rounds
-  
   @code = []
   @rounds = 0
   ARROW = "\u27eb".encode
@@ -24,6 +24,7 @@ class Codebreaker < Code
     @rounds = 0
   end
 
+  # rubocop:disable Metrics/MethodLength
   def turn
     @rounds += 1
     current_board = Board.new
@@ -37,6 +38,7 @@ class Codebreaker < Code
     else
       puts "#{ARROW} The feedback for round #{@rounds} is: #{pretty_pegs}"
     end
-    return result
+    result
   end
+  # rubocop:enable Metrics/MethodLength
 end

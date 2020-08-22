@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'availablecolors.rb'
 require_relative 'string.rb'
 require_relative 'instructions.rb'
@@ -18,7 +20,7 @@ class GamePlay
   @codebreaker = ''
   @win = false
   @user_name = ''
-  
+
   def initialize; end
 
   def start
@@ -31,12 +33,13 @@ class GamePlay
     @user_name = player_name
   end
 
+  # rubocop:disable Metrics/MethodLength
   def decide_roles(player1, player2)
-    puts "Would you like to crack a code or make one?"
-    puts "1. Break a code"
-    puts "2. Make a code"
-    while true
-      print "[1/2]: "
+    puts 'Would you like to crack a code or make one?'
+    puts '1. Break a code'
+    puts '2. Make a code'
+    loop do
+      print '[1/2]: '
       user_choice = gets.chomp.to_i
       if user_choice == 1
         player1.specify_role = 1
@@ -51,25 +54,29 @@ class GamePlay
         @codemaker = player1
         return true
       else
-        puts "Please enter either 1 or 2."
+        puts 'Please enter either 1 or 2.'
       end
     end
   end
+  # rubocop:enable Metrics/MethodLength
 
   def new_game_begin
     user = Player.new(start)
     jeeves = Player.new('Jeeves')
-    return decide_roles(user, jeeves)
+    decide_roles(user, jeeves)
   end
 
   def display_code_instructions
-    return valid_code
+    valid_code
   end
 
-  def replay_game?(ai_flag)
+  # rubocop:disable Metrics/MethodLength
+  # rubocop:disable Style/MultipleComparison
+  # rubocop:disable Lint/UselessAssignment
+  def replay_game?
     puts "\nGreat game, #{@user_name}! Would you like to play again?"
-    while true
-      print "[y/n]: "
+    loop do
+      print '[y/n]: '
       input = gets.chomp.downcase
       puts ''
       if input == 'y' || input == 'yes'
@@ -77,11 +84,14 @@ class GamePlay
         jeeves = Player.new('Jeeves')
         return true
       elsif input == 'n' || input == 'no'
-        puts "Very well. Thank you for playing and I hope to see you again soon!"
+        puts 'Very well. Thank you for playing and I hope to see you again soon!'
         return false
       else
         puts "I didn't quite get that. Would you like to play again?"
       end
     end
   end
+  # rubocop:enable Metrics/MethodLength
+  # rubocop:enable Style/MultipleComparison
+  # rubocop:enable Lint/UselessAssignment
 end
