@@ -10,7 +10,7 @@ require_relative 'feedback.rb'
 require_relative 'gameplay.rb'
 require_relative 'codebreaker.rb'
 require_relative 'codemaker.rb'
-####
+
 def replay?(game, ai_flag, replay_flag)
   game.replay_game?(ai_flag, replay_flag)
 end
@@ -19,11 +19,10 @@ end
 play = true
 
 begin_game = GamePlay.new
-use_AI = begin_game.new_game_begin(use_AI)
+use_AI = begin_game.new_game_begin
 puts begin_game.valid_code
 player1 = begin_game.codemaker
 player2 = begin_game.codemaker
-################### USER AND JEEVES OBJECTS CREATED; NAME AND ROLE SET; use_AI value set
 
 while play == true
 

@@ -56,7 +56,7 @@ class GamePlay
     end
   end
 
-  def new_game_begin(flag)
+  def new_game_begin
     user = Player.new(start)
     jeeves = Player.new('Jeeves')
     return decide_roles(user, jeeves)
