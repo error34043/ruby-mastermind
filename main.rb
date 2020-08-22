@@ -22,7 +22,7 @@ begin_game = GamePlay.new
 use_AI = begin_game.new_game_begin
 puts begin_game.valid_code
 player1 = begin_game.codemaker
-player2 = begin_game.codemaker
+player2 = begin_game.codebreaker
 
 while play == true
 
@@ -87,5 +87,4 @@ while play == true
   play = begin_game.replay_game?(use_AI)
   break if play == false
   use_AI = begin_game.decide_roles(player1, player2)
-  ################## THIS WORKS TO GET NEW INPUT FOR SPECIFYING ROLES
 end
