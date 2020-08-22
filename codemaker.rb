@@ -90,11 +90,3 @@ class Codemaker < Code
     return result
   end
 end
-
-
-# index of ['r','r','g','g'] is 7
-
-# test = Codemaker.new
-# result = test.jeeves_first_turn
-# test.evaluate_guess(result)
-# p test.solution_pool.length
