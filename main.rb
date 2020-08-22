@@ -71,7 +71,6 @@ while play == true
         end
         current_game.jeeves_thinks
         current_game.evaluate_guess(current_result)
-        p current_game.solution_pool.length
       end
       if win == false
         current_result = current_game.jeeves_turn
