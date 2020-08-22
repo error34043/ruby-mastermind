@@ -62,6 +62,10 @@ class GamePlay
     return decide_roles(user, jeeves)
   end
 
+  def display_code_instructions
+    return valid_code
+  end
+
   def replay_game?(ai_flag)
     puts "Great game, #{@user_name}! Would you like to play again?"
     while true
