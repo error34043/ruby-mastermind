@@ -48,12 +48,12 @@ while play == true
   end
 
 
-  #####
   # Loop for when user is the codemaker
-  # if use_AI == true
-
-  # end
-  #####
+  if use_AI == true
+    win = false
+    current_game = Codemaker.new
+    current_game.jeeves_first_turn
+  end
 
   play = begin_game.replay_game?(use_AI)
   break if play == false
